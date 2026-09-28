@@ -1,0 +1,87 @@
+{
+  "generator": "scripts/blender/generate_anatomical_teeth.py",
+  "license": "Original project asset",
+  "families": [
+    {
+      "key": "central-incisor",
+      "file": "central-incisor.glb",
+      "meshes": 2,
+      "vertices": 2780,
+      "polygons": 2748,
+      "roots": 1,
+      "bytes": 106676
+    },
+    {
+      "key": "lateral-incisor",
+      "file": "lateral-incisor.glb",
+      "meshes": 2,
+      "vertices": 2230,
+      "polygons": 2198,
+      "roots": 1,
+      "bytes": 86892
+    },
+    {
+      "key": "canine",
+      "file": "canine.glb",
+      "meshes": 2,
+      "vertices": 3046,
+      "polygons": 3014,
+      "roots": 1,
+      "bytes": 116264
+    },
+    {
+      "key": "first-premolar",
+      "file": "first-premolar.glb",
+      "meshes": 3,
+      "vertices": 3490,
+      "polygons": 3428,
+      "roots": 2,
+      "bytes": 141768
+    },
+    {
+      "key": "second-premolar",
+      "file": "second-premolar.glb",
+      "meshes": 2,
+      "vertices": 3208,
+      "polygons": 3176,
+      "roots": 1,
+      "bytes": 132624
+    },
+    {
+      "key": "first-molar",
+      "file": "first-molar.glb",
+      "meshes": 4,
+      "vertices": 5512,
+      "polygons": 5420,
+      "roots": 3,
+      "bytes": 221496
+    },
+    {
+      "key": "second-molar",
+      "file": "second-molar.glb",
+      "meshes": 4,
+      "vertices": 5046,
+      "polygons": 4954,
+      "roots": 3,
+      "bytes": 204768
+    },
+    {
+      "key": "third-molar",
+      "file": "third-molar.glb",
+      "meshes": 3,
+      "vertices": 4108,
+      "polygons": 4046,
+      "roots": 2,
+      "bytes": 168628
+    },
+    {
+      "key": "configurable-extra",
+      "file": "configurable-extra.glb",
+      "meshes": 3,
+      "vertices": 3756,
+      "polygons": 3694,
+      "roots": 2,
+      "bytes": 155980
+    }
+  ]
+}

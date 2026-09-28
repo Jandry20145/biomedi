@@ -1,0 +1,1 @@
+package ec.edu.ucacue.odontocare.clinicalrecord.infrastructure;import java.util.Optional;import org.springframework.data.jpa.repository.JpaRepository;import ec.edu.ucacue.odontocare.clinicalrecord.domain.VitalSigns;public interface VitalSignsRepository extends JpaRepository<VitalSigns,Long>{Optional<VitalSigns> findByConsultationId(Long id);}

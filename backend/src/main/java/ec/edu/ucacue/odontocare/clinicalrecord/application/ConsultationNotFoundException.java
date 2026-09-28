@@ -1,0 +1,1 @@
+package ec.edu.ucacue.odontocare.clinicalrecord.application;public class ConsultationNotFoundException extends RuntimeException{public ConsultationNotFoundException(Long id){super("No existe la consulta "+id+" en esta historia clínica.");}}

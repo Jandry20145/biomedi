@@ -1,0 +1,1 @@
+-- No longer needed, V2 sets the correct roles

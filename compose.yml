@@ -1,0 +1,70 @@
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    command: ["--log-bin-trust-function-creators=1"]
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-odontocare}
+      MYSQL_USER: ${MYSQL_USER:-odontocare}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Configure MYSQL_PASSWORD en .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Configure MYSQL_ROOT_PASSWORD en .env}
+    ports:
+      - "${MYSQL_PORT:-3307}:3306"
+    volumes:
+      - odontocare_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD:?Configure MYSQL_ROOT_PASSWORD en .env}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: unless-stopped
+    environment:
+      TZ: America/Guayaquil
+      SPRING_PROFILES_ACTIVE: dev
+      DB_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-odontocare}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USERNAME: ${MYSQL_USER:-odontocare}
+      DB_PASSWORD: ${MYSQL_PASSWORD:?Configure MYSQL_PASSWORD en .env}
+      JWT_SECRET: ${JWT_SECRET:?Configure JWT_SECRET en .env}
+      JWT_EXPIRATION_SECONDS: ${JWT_EXPIRATION_SECONDS:-1800}
+      ALLOWED_ORIGIN: ${ALLOWED_ORIGIN:-http://localhost:5173}
+      REPORT_INSTITUTION_NAME: ${REPORT_INSTITUTION_NAME:-Institucion academica demostrativa}
+      REPORT_SYSTEM_NAME: ${REPORT_SYSTEM_NAME:-OdontoCare 3D}
+    ports:
+      - "${BACKEND_PORT:-18080}:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 30s
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: /api/v1
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-5173}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  odontocare_mysql_data:

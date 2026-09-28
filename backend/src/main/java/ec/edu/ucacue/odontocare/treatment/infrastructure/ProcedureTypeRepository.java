@@ -1,0 +1,1 @@
+package ec.edu.ucacue.odontocare.treatment.infrastructure;import java.util.Optional;import org.springframework.data.jpa.repository.JpaRepository;import ec.edu.ucacue.odontocare.treatment.domain.ProcedureTypeCatalog;public interface ProcedureTypeRepository extends JpaRepository<ProcedureTypeCatalog,Long>{Optional<ProcedureTypeCatalog> findByCodeAndActiveTrue(String code);}

@@ -1,0 +1,5 @@
+export type BackgroundType = 'PERSONAL'|'FAMILY'|'PATHOLOGICAL'|'SURGICAL'|'ALLERGY'|'CURRENT_MEDICATION'|'CHRONIC_DISEASES'|'LAST_DENTAL_VISIT'|'PREVIOUS_DENTAL_TREATMENTS'|'PROSTHESIS_USE'|'ORTHODONTICS_USE'|'BRUXISM'|'ORAL_HABITS'|'ORAL_HYGIENE'|'BRUSHING_FREQUENCY'|'DENTAL_FLOSS_USE'|'MOUTHWASH_USE'|'DENTAL_OBSERVATIONS'
+export interface Patient { id:number; clinicalRecordId:number; clinicalRecordNumber:string; identification:string; responsibleName:string; firstNames:string; lastNames:string; birthDate:string; age:number; sex:string; address:string; phone:string; email:string; backgrounds:Partial<Record<BackgroundType,string>> }
+export interface PatientInput { clinicalRecordNumber?:string; identification:string; responsibleName:string; firstNames:string; lastNames:string; birthDate:string; sex:string; address:string; phone:string; email:string; backgrounds:Partial<Record<BackgroundType,string>> }
+export interface PatientPage { content:Patient[]; page:number; size:number; totalElements:number; totalPages:number }
+

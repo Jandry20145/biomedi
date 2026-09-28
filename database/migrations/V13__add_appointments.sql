@@ -1,0 +1,21 @@
+CREATE TABLE appointments (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    patient_id BIGINT UNSIGNED NOT NULL,
+    dentist_id BIGINT UNSIGNED NOT NULL,
+    appointment_date DATETIME(6) NOT NULL,
+    reason VARCHAR(500) NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
+    created_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_by BIGINT UNSIGNED NOT NULL,
+    updated_by BIGINT UNSIGNED NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_appointments_patient FOREIGN KEY (patient_id) REFERENCES patients (id),
+    CONSTRAINT fk_appointments_dentist FOREIGN KEY (dentist_id) REFERENCES Personal (id),
+    CONSTRAINT fk_appointments_created_by FOREIGN KEY (created_by) REFERENCES Personal (id),
+    CONSTRAINT fk_appointments_updated_by FOREIGN KEY (updated_by) REFERENCES Personal (id),
+    CONSTRAINT ck_appointments_status CHECK (status IN ('PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED')),
+    INDEX idx_appointments_patient (patient_id, appointment_date DESC),
+    INDEX idx_appointments_dentist (dentist_id, appointment_date DESC),
+    INDEX idx_appointments_date (appointment_date)
+) ENGINE = InnoDB;

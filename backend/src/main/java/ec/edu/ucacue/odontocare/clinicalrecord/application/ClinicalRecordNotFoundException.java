@@ -1,0 +1,1 @@
+package ec.edu.ucacue.odontocare.clinicalrecord.application;public class ClinicalRecordNotFoundException extends RuntimeException{public ClinicalRecordNotFoundException(Long id){super("No existe la historia clínica "+id+".");}}

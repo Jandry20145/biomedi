@@ -1,0 +1,25 @@
+:root { --ink: #102a43; --clinical: #0b6b61; --paper: #f3f0e8; --line: #cfd9d6; }
+.login-shell { min-height: 100vh; display: grid; grid-template-columns: minmax(20rem, 1.05fr) minmax(24rem, .95fr); background: var(--paper); }
+.login-intro { position: relative; padding: clamp(3rem, 8vw, 7rem); color: #f8fbfa; background: var(--ink); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+.login-intro::after { content: ''; position: absolute; width: 28rem; height: 28rem; border: 1px solid rgba(255,255,255,.14); border-radius: 50%; right: -12rem; bottom: -10rem; box-shadow: 0 0 0 5rem rgba(255,255,255,.025), 0 0 0 10rem rgba(255,255,255,.018); }
+.brand-mark { width: 3.25rem; height: 3.25rem; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.5); font: 700 .9rem Georgia, serif; letter-spacing: .12em; }
+.eyebrow, .step-label { text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; font-weight: 700; }
+.eyebrow { color: #9cd8ce; margin-bottom: 1rem; }
+.login-intro h1 { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(3rem, 6vw, 5.8rem); line-height: .92; letter-spacing: -.05em; max-width: 8ch; }
+.login-intro h1 span { color: #79cdbf; }
+.intro-copy { max-width: 34rem; margin-top: 2rem; color: #d5e2e0; font-size: 1.08rem; }
+.privacy-note { position: relative; z-index: 1; margin: 3rem 0 0; color: #9fb2b6; font-size: .85rem; }
+.login-panel { display: grid; place-items: center; padding: clamp(2rem, 7vw, 6rem); }
+.login-card { width: min(100%, 27rem); }
+.step-label { color: var(--clinical); margin-bottom: .75rem; }
+.login-card h2 { color: var(--ink); font-family: Georgia, 'Times New Roman', serif; font-size: 2.6rem; letter-spacing: -.035em; }
+.login-help { color: #61717e; margin-bottom: 2.5rem; }
+.form-label { color: var(--ink); font-weight: 650; }
+.form-control { min-height: 3.25rem; border-color: var(--line); background: rgba(255,255,255,.72); }
+.form-control:focus { border-color: var(--clinical); box-shadow: 0 0 0 .2rem rgba(11,107,97,.12); }
+.login-button { min-height: 3.35rem; color: white; background: var(--clinical); font-weight: 700; }
+.login-button:hover, .login-button:focus { color: white; background: #07564e; }
+.session-note { color: #77848c; font-size: .78rem; text-align: center; margin: 1.25rem 0 0; }
+@media (max-width: 800px) { .login-shell { grid-template-columns: 1fr; } .login-intro { min-height: 20rem; padding: 2rem; } .login-intro h1 { font-size: 3.5rem; } .privacy-note { margin-top: 2rem; } .login-panel { padding: 3rem 1.5rem; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+

@@ -1,0 +1,1 @@
+package ec.edu.ucacue.odontocare.treatment.presentation;import java.time.*;import ec.edu.ucacue.odontocare.treatment.domain.EvolutionResult;public record EvolutionClinicalResponse(Long id,Long consultationId,String pieceCode,Long procedureId,String description,EvolutionResult result,LocalDateTime date,LocalDate nextControl){}

@@ -1,0 +1,3 @@
+import type { OdontogramFilter } from './types'
+const options:[OdontogramFilter,string,string][]=[['ALL','Todas','36'],['AFFECTED','Afectadas','!'],['PENDING','Tratamiento pendiente','↗'],['HISTORY','Con historial','◷']]
+export function OdontogramFilters({value,onChange}:{value:OdontogramFilter;onChange:(value:OdontogramFilter)=>void}){return <fieldset className="odontogram-filters"><legend>Filtrar piezas</legend>{options.map(([key,label,icon])=><label key={key}><input type="radio" name="tooth-filter" value={key} checked={value===key} onChange={()=>onChange(key)}/><span><i>{icon}</i>{label}</span></label>)}</fieldset>}

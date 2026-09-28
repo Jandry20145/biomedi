@@ -1,0 +1,3 @@
+import { STATUS_VISUALS } from './statusVisuals'
+const representative=['SANA','CARIES','RESTAURACION','OBTURACION_TEMPORAL','EXTRACCION_INDICADA','ENDODONCIA','CORONA','OBSERVACION'] as const
+export function OdontogramLegend(){return <section className="odontogram-legend" aria-labelledby="legend-title"><h2 id="legend-title">Leyenda clínica</h2><div>{representative.map(status=><span key={status}><i style={{backgroundColor:STATUS_VISUALS[status].color}}>{STATUS_VISUALS[status].symbol}</i>{STATUS_VISUALS[status].label}</span>)}</div><p>Color y símbolo son ayudas visuales. El estado estructurado del backend conserva el valor clínico.</p></section>}

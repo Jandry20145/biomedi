@@ -1,0 +1,3 @@
+import type { CameraView } from './types'
+interface Props {onView:(view:CameraView)=>void;onReset:()=>void}
+export function OdontogramControls({onView,onReset}:Props){return <div className="odontogram-controls" role="toolbar" aria-label="Controles de cámara 3D"><button onClick={onReset}>Restablecer</button><button onClick={()=>onView('FRONT')}>Frontal</button><button onClick={()=>onView('TOP')}>Superior</button><button onClick={()=>onView('BOTTOM')}>Inferior</button><button onClick={()=>onView('LEFT')}>Lateral izquierda</button><button onClick={()=>onView('RIGHT')}>Lateral derecha</button><span>Arrastre para rotar · rueda para zoom</span></div>}

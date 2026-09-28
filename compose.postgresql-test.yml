@@ -1,0 +1,39 @@
+services:
+  postgresql-test:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: odontocare
+      POSTGRES_USER: odontocare
+      POSTGRES_PASSWORD: ${POSTGRES_TEST_PASSWORD:?Configure POSTGRES_TEST_PASSWORD en .env}
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odontocare -d odontocare"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    tmpfs:
+      - /var/lib/postgresql/data
+
+  backend-postgresql-test:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: supabase
+      SUPABASE_DB_URL: jdbc:postgresql://postgresql-test:5432/odontocare
+      SUPABASE_DB_USERNAME: odontocare
+      SUPABASE_DB_PASSWORD: ${POSTGRES_TEST_PASSWORD:?Configure POSTGRES_TEST_PASSWORD en .env}
+      JWT_SECRET: ${POSTGRES_TEST_JWT_SECRET:?Configure POSTGRES_TEST_JWT_SECRET en .env}
+      ALLOWED_ORIGIN: http://localhost:5173
+    ports:
+      - "18081:8080"
+    depends_on:
+      postgresql-test:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/api/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
